@@ -1,0 +1,54 @@
+/*
+Allan Kong, 30171801
+Mark Cena, 30176936
+Sarthak Singh, 30180318
+Arjit Chitkara, 30169949
+Kyle Ontiveros, 30193288
+Ronaar Qureshi, 30147045
+Sufian Tariq, 30179995
+Ahmed Tahmid, 30175756
+Labib Ahmed, 30194888
+Ana DuCristea, 30170871
+Kazi Badrul Arif, 30161466
+Yazeed Badr, 30176535
+Arshaum Hajinabi, 30189955
+Juan Calvo Franco, 30192699 
+Arpit Chitkara, 30170166
+Saahim Salman, 30125256
+Siddharth Sadhwani, 30194796
+Farhan Labib, 30176224
+Parushrut Dubey: 30196553
+Tanjim Rahman, UCID: 30182328
+Noelle Thundathil, 30115430 
+ */
+
+package shopping.manager;
+
+import com.thelocalmarketplace.hardware.AbstractSelfCheckoutStation;
+import com.thelocalmarketplace.hardware.SelfCheckoutStationBronze;
+import com.thelocalmarketplace.hardware.SelfCheckoutStationGold;
+import com.thelocalmarketplace.hardware.SelfCheckoutStationSilver;
+
+public class SelfCheckoutStationFactory {
+
+    public static AbstractSelfCheckoutStation createSelfCheckoutStation(String type, ConfigCheckoutStation config) {
+        AbstractSelfCheckoutStation.configureCurrency(config.getCurrency());
+        AbstractSelfCheckoutStation.configureBanknoteDenominations(config.getBanknoteDenominations());
+        AbstractSelfCheckoutStation.configureBanknoteStorageUnitCapacity(config.getBanknoteStorageUnitCapacity());
+        AbstractSelfCheckoutStation.configureCoinDenominations(config.getCoinDenominations());
+        AbstractSelfCheckoutStation.configureCoinStorageUnitCapacity(config.getCoinStorageUnitCapacity());
+        AbstractSelfCheckoutStation.configureCoinTrayCapacity(config.getCoinTrayCapacity());
+        AbstractSelfCheckoutStation.configureCoinDispenserCapacity(config.getCoinDispenserCapacity());
+
+        switch (type) {
+            case "Bronze":
+                return new SelfCheckoutStationBronze();
+            case "Silver":
+                return new SelfCheckoutStationSilver();
+            case "Gold":
+                return new SelfCheckoutStationGold();
+            default:
+                throw new IllegalArgumentException("Invalid station type");
+        }
+    }
+}
